@@ -1,0 +1,42 @@
+file_path = "Q-1-1-1-1-1-1_R-05-05.mat";
+
+function plot_matfile(file_path, columns);
+    % Load the .mat file
+    data = load(file_path);
+    
+    % Extract the first numerical matrix with 7 columns
+    fields = fieldnames(data);
+    matrix = [];
+    for i = 1:length(fields)
+        if ismatrix(data.(fields{i})) && size(data.(fields{i}), 2) == 7
+            matrix = data.(fields{i});
+            break;
+        end
+    end
+    
+    if isempty(matrix)
+        error('No valid 7-column matrix found in the .mat file.');
+    end
+    
+    % Validate selected columns (excluding the first column, which is time)
+    if any(columns < 2 | columns > 7)
+        error('Invalid column selection. Choose columns between 2 and 7 (data columns).');
+    end
+    
+    % Extract time and selected data columns
+    time = matrix(:, 1);
+    
+    % Create a plot
+    figure;
+    hold on;
+    for i = columns
+        plot(time, matrix(:, i), 'DisplayName', sprintf('Column %d', i));
+    end
+    hold off;
+    
+    xlabel('Time Steps');
+    ylabel('Value');
+    title('Plot of Selected Columns from .mat File');
+    legend;
+    grid on;
+end
