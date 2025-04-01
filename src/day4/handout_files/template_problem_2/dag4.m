@@ -41,7 +41,7 @@ Aeq = gen_aeq(A_disc, B_disc, N, nx, nu);          % Generate A, hint: gen_aeq
 beq = zeros(size(Aeq,1),1);                        % Generate b
 beq(1:nx) = A_disc*x0;
 
-q1 = 2;
+q1 = 5;
 q2 = 5;
 
 % Bounds
