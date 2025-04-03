@@ -77,7 +77,7 @@ opt = optimoptions('fmincon', 'Algorithm', 'sqp', 'MaxFunEvals', 40000);
 [Z,ZVAL,EXITFLG] = fmincon(f, z0, [],[], Aeq, beq, vlb, vub, @constraints,opt);
 
 %Q_lqr = diag([5,.2,.1,15,30,10]);
-Q_lqr = diag([5,.3,.1,15,30,10]);
+Q_lqr = diag([20,.3,.5,10,30,10]);
 R_lqr = diag([.5,.5]);
 disp(R_lqr)
 [K,S,P] = dlqr(A_disc, B_disc, Q_lqr, R_lqr);

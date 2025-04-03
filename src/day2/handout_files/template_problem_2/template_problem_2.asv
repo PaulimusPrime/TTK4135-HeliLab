@@ -1,6 +1,6 @@
 % TTK4135 - Helicopter lab
 % Hints/template for problem 2.
-% Updated spring 2018, Andreas L. Flåten
+% Updated spring 2018, Andreas L. FlÃ¥ten
 
 %% Initialization and model definition
 "../init_files_2021_v2/init.m"; % Change this to the init file corresponding to your helicopter
@@ -8,15 +8,15 @@
 % Discrete time system model. x = [lambda r p p_dot]'
 delta_t	= 0.25; % sampling time
 A1 = [
-    1, 0.25, 0, 0;
-    0, 1, -0.25*K_2, 0;
-    0, 0, 1, 0.25;
-    0, 0, 0, 1 ];
+    1, delta_t, 0, 0;
+    0, 1, -delta_t*K_2, 0;
+    0, 0, 1, delta_t;
+    0, 0, -K_1*K_pp * delta_t, 1 - K_1*K_pd * delta_t];
 B1 = [
     0;
     0;
     0;
-    0
+    K_1*K_pp * delta_t
     ];
 
 % Number of states and inputs
@@ -56,17 +56,17 @@ Q1(1,1) = 1;                            % Weight on state x1
 Q1(2,2) = 1;                            % Weight on state x2
 Q1(3,3) = 1;                            % Weight on state x3
 Q1(4,4) = 1;                            % Weight on state x4
-P1 = 0.12;                                 % Weight on input
+P1 = 12;                                 % Weight on input
 Q = gen_q(Q1, P1, M, N);                % Generate Q, hint: gen_q
-c = zeros(N,1);                         % Generate c, this is the linear constant term in the QP
+c = zeros(500,1);                         % Generate c, this is the linear constant term in the QP
 
 %% Generate system matrixes for linear model
 Aeq = gen_aeq(A1, B1, N, mx, mu);          % Generate A, hint: gen_aeq
 beq = zeros(400,1);                        % Generate b
-beq(1:4) = A*x0;
+beq(1:4) = A1*x0;
 %% Solve QP problem with linear model
 tic
-[z,lambda] = quadprog(Q, , Aeq, beq, ul, uu); % hint: quadprog. Type 'doc quadprog' for more info 
+[z,lambda] = quadprog(Q,c,[],[], Aeq, beq, vlb, vub); % hint: quadprog. Type 'doc quadprog' for more info 
 t1=toc;
 
 % Calculate objective value
@@ -94,6 +94,15 @@ x1  = [pi*unit_padding; x1; zero_padding];
 x2  = [zero_padding; x2; zero_padding];
 x3  = [zero_padding; x3; zero_padding];
 x4  = [zero_padding; x4; zero_padding];
+
+cont_vec = zeros(140,1);
+count = 0;
+for i=1:141
+   count = count + delta_t;
+   cont_vec(i) = count;
+   s
+end
+paadrag = [cont_vec, u];
 
 %% Plotting
 t = 0:delta_t:delta_t*(length(u)-1);
