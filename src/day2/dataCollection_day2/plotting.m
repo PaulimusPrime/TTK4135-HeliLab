@@ -1,7 +1,9 @@
-file = "dag2_opt_deg_p012";
-title = "optReg-p_{0.12}";
+"../../handout_files/template_problem_2/template_problem_2.m";
+file = "opt_traj_q0.12";
+title = "optReg-q_{0.12}";
 
-plot_matFile(file + '.mat', [2,4,5,6], title, file)
+
+plot_matFile(file + '.mat', [6], title, file)
 
 
 function plot_matFile(file_path, rows, Title, save_as)
@@ -31,23 +33,41 @@ function plot_matFile(file_path, rows, Title, save_as)
     time = matrix(1, :); % First row as time
     
     % Variable names corresponding to rows 2:7
-    variable_names = {'\lambda (travel)', 'r (travel rate)', 'p (pitch)', ...
+    variable_names = {'Time','\lambda (travel)', 'r (travel rate)', 'p (pitch)', ...
                       "p' (pitch rate)", 'e (elevation)', "e' (elevation rate)"};
     
+    delta_t = 0.25;
+    
+    t = 0:delta_t:delta_t*(140-1);
     % Create a plot
     figure;
+    
+    
+    subplot(2,1,1);
     hold on;
-    for i = rows
-        plot(time, matrix(i, :), 'DisplayName', variable_names{i-1}, 'LineWidth', 2);
-    end
+    plot(time, matrix(2, :), 'DisplayName', variable_names{2}, 'LineWidth', 1);
+    %plot(t,x1, 'r--',"LineWidth",1.5)
     hold off;
     
     xlabel('Time Steps');
     xlim([0,20])
-    ylabel('Value');
-    ylim([-40,55])
-    title(Title);
+    ylabel('Degrees');
+    %ylim([-3,5]);
+    title(Title + "- Travel");
     legend;
     grid on;
-    saveas(gcf, 'day2_' + save_as + '.png');
+    
+    subplot(2,1,2);
+    hold on;
+    plot(time, matrix(6, :), 'DisplayName', variable_names{6}, 'LineWidth', 1);
+    hold off;
+    
+    xlabel('Time Steps');
+    xlim([0,20])
+    ylabel('Degrees');
+    %ylim([-3,5]);
+    title(Title + "- Elevation");
+    legend;
+    grid on;
+    %saveas(gcf, 'day2_' + save_as + '.png');
 end

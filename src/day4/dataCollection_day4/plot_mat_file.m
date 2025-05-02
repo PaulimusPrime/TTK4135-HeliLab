@@ -1,7 +1,7 @@
 file = "Q-5-03-01-15-30-10_R-05-05";
 title = "Q = diag(5,0.3,0.1,15,30,10), R = diag(0.5,0.5)";
 
-plot_matFile(file + '.mat', [2,4,5,6], title, file)
+plot_matFile(file + '.mat', [6,7], title, file)
 
 
 function plot_matFile(file_path, rows, Title, save_as)
@@ -45,9 +45,9 @@ function plot_matFile(file_path, rows, Title, save_as)
     xlabel('Time Steps');
     xlim([0,25])
     ylabel('Value');
-    ylim([-2.5,3.5])
+    ylim([-3,3.5])
     title(Title);
     legend;
     grid on;
-    saveas(gcf, 'day4_' + save_as + '.png');
+    %saveas(gcf, 'day4_' + save_as + '.png');
 end

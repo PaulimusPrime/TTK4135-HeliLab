@@ -24,8 +24,8 @@ J_p = 2 * ( m_h/2 * l_h * l_h);   % Moment of interia for pitch
 J_t = 2 * m_h * l_a *l_a;         % Moment of interia for travel
 
 % Identified voltage sum and difference
-V_s_eq = 7.55;%6.6; % Identified equilibrium voltage sum.
-V_d_eq = 0.1;%0.5 Identified equilibrium voltage difference.
+V_s_eq = 7.73;%6.4; % Identified equilibrium voltage sum.
+V_d_eq = 0.1;%0.45; % Identified equilibrium voltage difference.
 
 % Model parameters
 K_p = m_g*9.81; % Force to lift the helicopter from the ground.

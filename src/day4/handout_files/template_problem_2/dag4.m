@@ -41,11 +41,11 @@ Aeq = gen_aeq(A_disc, B_disc, N, nx, nu);          % Generate A, hint: gen_aeq
 beq = zeros(size(Aeq,1),1);                        % Generate b
 beq(1:nx) = A_disc*x0;
 
-q1 = 5;
-q2 = 5;
+q1 = 0.4;
+q2 = q1;
 
 % Bounds
-ul 	    = 0;                   % Lower bound on control
+ul 	    = -(1/6) * pi;                   % Lower bound on control
 uu 	    = (1/6) * pi;                   % Upper bound on control
 
 xl      = -Inf*ones(nx,1);              % Lower bound on states (no bound)

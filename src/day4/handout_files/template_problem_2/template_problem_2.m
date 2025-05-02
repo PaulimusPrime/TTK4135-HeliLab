@@ -37,8 +37,8 @@ z  = zeros(N*mx+M*mu,1);                % Initialize z for the whole horizon
 z0 = z;                                 % Initial value for optimization
 
 % Bounds
-ul 	    = 0;                   % Lower bound on control
-uu 	    = 1;                   % Upper bound on control
+ul 	    = -1/6 * pi;                   % Lower bound on control
+uu 	    = 1/6 * pi;                   % Upper bound on control
 
 xl      = -Inf*ones(mx,1);              % Lower bound on states (no bound)
 xu      = Inf*ones(mx,1);               % Upper bound on states (no bound)

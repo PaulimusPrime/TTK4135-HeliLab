@@ -94,13 +94,13 @@ x1  = [pi*unit_padding; x1; zero_padding];
 x2  = [zero_padding; x2; zero_padding];
 x3  = [zero_padding; x3; zero_padding];
 x4  = [zero_padding; x4; zero_padding];
-
+length(u)
 cont_vec = zeros(140,1);
 count = 0;
 for i=1:141
    count = count + delta_t;
    cont_vec(i) = count;
-   s
+   s;
 end
 paadrag = [cont_vec, u];
 
